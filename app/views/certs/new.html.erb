@@ -1,0 +1,9 @@
+<h2> new Certs </h2> </br>
+
+<%= form_tag certs_path, method: :post do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+  <%= label_tag :description %>
+  <%= text_field_tag :description %>
+  <%= submit_tag "Save", class: "btn btn-warning" %>
+<% end %>

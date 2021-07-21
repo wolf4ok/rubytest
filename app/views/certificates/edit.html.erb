@@ -1,0 +1,15 @@
+<h2> edit Certificates </h2> </br>
+
+<%= form_tag certificate_path(@certificates), method: :put do %>
+  <%= label_tag :user %>
+  <%= text_field_tag :user, @certificates.user %>
+  <%= label_tag :certs %>
+  <%= text_field_tag :certs, @certificates.certs %>
+  <%= label_tag :number %>
+  <%= text_field_tag :number, @certificates.number %>
+  <%= label_tag :data %>
+  <%= date_field_tag :data, @certificates.data %>
+  <%= label_tag :file %>
+  <%= text_field_tag @certificates.file %>
+  <%= submit_tag "Update", class: "btn btn-warning" %>
+<% end %>

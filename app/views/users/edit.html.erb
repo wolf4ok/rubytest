@@ -1,0 +1,25 @@
+<h2> edit User </h2> </br>
+
+<%= form_tag user_path(@user), method: :put do %>
+  <%= label_tag :lastname %>
+  <%= text_field_tag :lastname, @user.lastname %>
+  <%= label_tag :firstname %>
+  <%= text_field_tag :firstname, @user.firstname %>
+  <%= label_tag :surname %>
+  <%= text_field_tag :surname, @user.surname %>
+  <%= label_tag :accaunt %>
+  <%= text_field_tag :accaunt, @user.accaunt %>
+  <%= label_tag :foto %>
+  <%= file_field_tag @user.foto %>
+  <%= label_tag :mail %>
+  <%= text_field_tag :mail, @user.mail %>
+  <%= label_tag :home %>
+  <%= text_field_tag :home, @user.home %>
+  <%= label_tag :resume %>
+  <%= file_field_tag @user.resume %>
+  <%= label_tag :resume_active %>
+  <%= check_box_tag :resume_active, @user.resume_active %>
+  <%= label_tag :comment %>
+  <%= text_field_tag :comment, @user.comment %>
+  <%= submit_tag "Update", class: "btn btn-warning" %>
+<% end %>

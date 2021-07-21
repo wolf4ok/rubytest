@@ -1,0 +1,9 @@
+<h2> edit Cert </h2> </br>
+
+<%= form_tag cert_path(@cert), method: :put do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name, @cert.name %>
+  <%= label_tag :description %>
+  <%= text_field_tag :description, @cert.description %>
+  <%= submit_tag "Update", class: "btn btn-warning" %>
+<% end %>

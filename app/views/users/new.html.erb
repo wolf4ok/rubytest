@@ -1,0 +1,25 @@
+<h2> new User </h2> </br>
+
+<%= form_tag users_path, method: :post do %>
+  <%= label_tag :lastname %>
+  <%= text_field_tag :lastname %>
+  <%= label_tag :firstname %>
+  <%= text_field_tag :firstname %>
+  <%= label_tag :surname %>
+  <%= text_field_tag :surname %>
+  <%= label_tag :accaunt %>
+  <%= text_field_tag :accaunt %>
+  <%= label_tag :foto %>
+  <%= file_field_tag :foto %>
+  <%= label_tag :mail %>
+  <%= text_field_tag :mail %>
+  <%= label_tag :home %>
+  <%= text_field_tag :home %>
+  <%= label_tag :resume %>
+  <%= file_field_tag :resume %>
+  <%= label_tag :resume_active %>
+  <%= check_box_tag :resume_active %>
+  <%= label_tag :comment %>
+  <%= text_field_tag :comment %>
+  <%= submit_tag "Save", class: "btn btn-warning" %>
+<% end %>

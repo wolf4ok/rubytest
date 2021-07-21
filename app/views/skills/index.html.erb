@@ -1,0 +1,24 @@
+<section id="scroll">
+  <div class="container px-5">
+    <div class="row gx-5 align-items-center">
+      <div class="col-lg-6 order-lg-1">
+        <div class="p-5">
+          <h1> Skills </h1>
+        </div>
+      </div>
+    </div>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Знайти</button>
+    </form>
+  </div>
+  <div>
+    <% @skills.each do |skill| %>
+      <ul>
+        <li>Name: <%= link_to skill.name, edit_skill_path(skill) %></li>
+        <li>Description: <%=  skill.description %></li>
+        <%= button_to 'Delete', skill_path(skill), method: :delete %>
+      </ul>
+    <% end %>
+  </div>
+</section>
