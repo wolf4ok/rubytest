@@ -1,26 +1,42 @@
 <section id="scroll">
+  <div>
+    <div class="scrollform">
+      <%= link_to 'Користувачі', users_path %>
+      <%= link_to 'Сертифікати', certificates_path %>
+      <%= link_to 'Навички', skills_path %>
+      <%= link_to 'Типи сертифікатів', certs_path %>
+      <a href=""> Акаунти</a>
+    </div>
   <div class="container px-5">
     <div class="row gx-5 align-items-center">
       <div class="col-lg-6 order-lg-1">
         <div class="p-5">
-          <h1> Certificates </h1>
+          <h2> Certificates </h2>
         </div>
       </div>
     </div>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Знайти</button>
-    </form>
+    <div style ="width: 50%; margin: 0 auto;">
+      <div>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Знайти</button>
+        </form>
+      </div>
+      <div>
+        <%= button_to 'New Certificate', new_certificate_path, method: :get %>
+      </div>
+    </div>
   </div>
   <div>
-    <% @certificates.each do |certificate| %>
-      <ul>
-        <li>User: <%= link_to certificate.user, edit_certificate_path(certificate) %></li>
-        <li>Cert type: <%=  certificate.certs %></li>
-        <li>Number: <%=  certificate.number %></li>
-        <li>Date: <%=  certificate.data %></li>
-        <%= button_to 'Delete', certificate_path(certificate), method: :delete %>
-      </ul>
-    <% end %>
+    <table>
+      <tr><th>Користувач</th><th>Тип сертифікату</th><th>Номер сертифікату</th><th>Дата отримання</th></tr>
+      <% @certificates.each do |certificate| %>
+        <tr><td><%= link_to certificate.user, edit_certificate_path(certificate) %></td><td><%=  certificate.certs %></td><td><%=  certificate.number %></td><td><%=  certificate.data %></td></tr>
+        <tr><td colspan="4" align="right">
+          <%= button_to 'Delete', certificate_path(certificate), method: :delete %>
+        </td></tr>
+      <% end %>
+    </table>
+  </div>
   </div>
 </section>
