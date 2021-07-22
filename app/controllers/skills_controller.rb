@@ -14,8 +14,8 @@ class SkillsController < ApplicationController
   end
 
   def create
-    skill = Skill.create(skills_params)
-    if skill.persisted?
+    @skill = Skill.create(skills_params)
+    if @skill.persisted?
       redirect_to skills_path
     else
       flash.now[:error] = "Заповніть усі поля коректно"
@@ -24,7 +24,9 @@ class SkillsController < ApplicationController
 
   end
 
-  def new; end
+  def new
+    @skill = Skill.new
+  end
 
   def show; end
 
@@ -52,7 +54,7 @@ class SkillsController < ApplicationController
   private
 
   def  skills_params
-    params.permit(:name, :description)
+    params.require(:skill).permit(:name, :description)
   end
 
   def skill_item

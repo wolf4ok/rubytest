@@ -1,9 +1,7 @@
 <h2> edit Skill </h2> </br>
 
-<%= form_tag skill_path(@skill), method: :put do %>
-  <%= label_tag :name %>
-  <%= text_field_tag :name, @skill.name %>
-  <%= label_tag :description %>
-  <%= text_field_tag :description, @skill.description %>
-  <%= submit_tag "Update", class: "btn btn-warning" %>
+<%= simple_form_for @skill do |f| %>
+  <%= f.input :name, label: 'Name:', input_html: {class: "form-text"} %>
+  <%= f.input :description, label: 'Description:', input_html: {class: "form-text"} %>
+  <%= f.button :submit, "Update", class: "btn btn-warning" %>
 <% end %>

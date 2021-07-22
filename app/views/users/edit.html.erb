@@ -1,25 +1,14 @@
 <h2> edit User </h2> </br>
 
-<%= form_tag user_path(@user), method: :put do %>
-  <%= label_tag :lastname %>
-  <%= text_field_tag :lastname, @user.lastname %>
-  <%= label_tag :firstname %>
-  <%= text_field_tag :firstname, @user.firstname %>
-  <%= label_tag :surname %>
-  <%= text_field_tag :surname, @user.surname %>
-  <%= label_tag :accaunt %>
-  <%= text_field_tag :accaunt, @user.accaunt %>
-  <%= label_tag :foto %>
-  <%= file_field_tag @user.foto %>
-  <%= label_tag :mail %>
-  <%= text_field_tag :mail, @user.mail %>
-  <%= label_tag :home %>
-  <%= text_field_tag :home, @user.home %>
-  <%= label_tag :resume %>
-  <%= file_field_tag @user.resume %>
-  <%= label_tag :resume_active %>
-  <%= check_box_tag :resume_active, @user.resume_active %>
-  <%= label_tag :comment %>
-  <%= text_field_tag :comment, @user.comment %>
-  <%= submit_tag "Update", class: "btn btn-warning" %>
+<%= simple_form_for @user do |f| %>
+  <%= f.input :lastname, label: 'Lastname:', input_html: {class: "form-text"} %>
+  <%= f.input :firstname, label: 'Firstname:', input_html: {class: "form-text"} %>
+  <%= f.input :surname, label: 'Surname:', input_html: {class: "form-text"} %>
+  <%= f.input :foto, label: 'Foto:', input_html: {class: "form-text"} %>
+  <%= f.input :mail, label: 'Email addr:', input_html: {class: "form-text"} %>
+  <%= f.input :home, label: 'Home addr:', input_html: {class: "form-text"} %>
+  <%= f.input :resume, label: 'Resume:', input_html: {class: "form-text"} %>
+  <%= f.input :resume_active, label: 'Resume is active:', input_html: {class: "form-text"} %>
+  <%= f.input :comment, label: 'Comments:', input_html: {class: "form-text"} %>
+  <%= f.button :submit, "Update", class: "btn btn-warning" %>
 <% end %>

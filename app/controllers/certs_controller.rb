@@ -14,8 +14,8 @@ class CertsController < ApplicationController
   end
 
   def create
-    cert = Cert.create(certs_params)
-    if cert.persisted?
+    @cert = Cert.create(certs_params)
+    if @cert.persisted?
       redirect_to certs_path
     else
       flash.now[:error] = "Заповніть усі поля коректно"
@@ -23,7 +23,9 @@ class CertsController < ApplicationController
     end
   end
 
-  def new; end
+  def new
+    @cert = Cert.new
+  end
 
   def show; end
 
@@ -51,7 +53,7 @@ class CertsController < ApplicationController
   private
 
   def  certs_params
-    params.permit(:name, :description)
+    params.require(:cert).permit(:name, :description)
   end
 
   def cert_item

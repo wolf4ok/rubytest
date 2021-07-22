@@ -1,9 +1,7 @@
 <h2> edit Cert </h2> </br>
 
-<%= form_tag cert_path(@cert), method: :put do %>
-  <%= label_tag :name %>
-  <%= text_field_tag :name, @cert.name %>
-  <%= label_tag :description %>
-  <%= text_field_tag :description, @cert.description %>
-  <%= submit_tag "Update", class: "btn btn-warning" %>
+<%= simple_form_for @cert do |f| %>
+  <%= f.input :name, label: 'Name:', input_html: {class: "form-text"} %>
+  <%= f.input :description, label: 'Description:', input_html: {class: "form-text"} %>
+  <%= f.button :submit, "Save", class: "btn btn-warning" %>
 <% end %>

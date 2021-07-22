@@ -1,9 +1,7 @@
 <h2> new Skills </h2> </br>
 
-<%= form_tag skills_path, method: :post do %>
-  <%= label_tag :name %>
-  <%= text_field_tag :name %>
-  <%= label_tag :description %>
-  <%= text_field_tag :description %>
-  <%= submit_tag "Save", class: "btn btn-warning" %>
+<%= simple_form_for @skill do |f| %>
+  <%= f.input :name, label: 'Name:', input_html: {class: "form-text"} %>
+  <%= f.input :description, label: 'Description:', input_html: {class: "form-text"} %>
+  <%= f.button :submit, "Save", class: "btn btn-warning" %>
 <% end %>

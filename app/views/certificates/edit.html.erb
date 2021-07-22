@@ -1,15 +1,10 @@
 <h2> edit Certificates </h2> </br>
 
-<%= form_tag certificate_path(@certificate), method: :put do %>
-  <%= label_tag :user_id %>
-  <%= text_field_tag :user_id, @certificate.user_id %>
-  <%= label_tag :cert_id %>
-  <%= text_field_tag :cert_id, @certificate.cert_id %>
-  <%= label_tag :number %>
-  <%= text_field_tag :number, @certificate.number %>
-  <%= label_tag :data %>
-  <%= date_field_tag :data, @certificate.data %>
-  <%= label_tag :file %>
-  <%= text_field_tag @certificate.file %>
-  <%= submit_tag "Update", class: "btn btn-warning" %>
+<%= simple_form_for @certificate do |f| %>
+  <%= f.input :user_id, label: 'User:', input_html: {class: "form-text"} %>
+  <%= f.input :cert_id, label: 'Cert type:', input_html: {class: "form-text"} %>
+  <%= f.input :number, label: 'Cert number:', input_html: {class: "form-text"} %>
+  <%= f.input :data, label: 'Data:', input_html: {class: "form-text"} %>
+  <%= f.input :file, label: 'File:', input_html: {class: "form-text"} %>
+  <%= f.button :submit, "Update", class: "btn btn-warning" %>
 <% end %>

@@ -10,7 +10,7 @@
           <div class="col-lg-6 order-lg-1">
             <div class="p-5">
               <h2 class="display-4">Результат пошуку</h2>
-                <p>Вказаний Вами номер сертифікату не існує</p>
+                <p>Жодного резюме не знайдено</p>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <button class="btn btn-warning" type="button">Назад</button>
@@ -26,7 +26,7 @@
             <div class="p-5">
               <h2 class="display-4">Результат пошуку</h2>
               <% @file.each do |file| %>
-              <p>Було знайдено <%=  file.number %> сертифікат</p>
+              <p>Знайдено <%=  file.number %> </p>
               <p><%=  file.file %></p>
               <% end %>
             </div>
@@ -40,8 +40,8 @@
           </div>
           <div class="col-lg-6 order-lg-1">
             <div class="p-5">
-              <h2 class="display-4">Пошук</h2>
-              <p>Для пошуку сертифікату введіть його номер та натисніть кнопку пошуку</p>
+              <h2 class="display-4">Пошук Резуюме</h2>
+              <p>Для пошуку виберіть категорії навичок, які Вас цікавлять та натисніть кнопку пошуку</p>
             </div>
           </div>
         </div>

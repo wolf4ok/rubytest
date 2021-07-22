@@ -14,8 +14,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(users_params)
-    if user.persisted?
+    @user = User.create(users_params)
+    if @user.persisted?
       redirect_to users_path
     else
       flash.now[:error] = "Заповніть усі поля коректно"
@@ -23,7 +23,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def new; end
+  def new
+    @user = User.new
+  end
 
   def show; end
 
@@ -51,7 +53,7 @@ class UsersController < ApplicationController
   private
 
   def  users_params
-    params.permit(:lastname, :firstname, :surname, :mail, :home, :resume_active, :comment, :skills, :accaunt)
+    params.require(:user).permit(:lastname, :firstname, :surname, :foto, :mail, :home, :resume, :resume_active, :comment, :skills)
   end
 
   def user_item
