@@ -1,20 +1,54 @@
 
 <section id="scroll">
   <div class="container px-5">
-    <div class="row gx-5 align-items-center">
-      <div class="col-lg-6 order-lg-2">
-        <div class="p-5"><img class="img-fluid rounded-circle" src="img/01.jpg" alt="..." /></div>
-      </div>
-      <div class="col-lg-6 order-lg-1">
-        <div class="p-5">
-          <h2 class="display-4">Пошук</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+    <% if @file != nil %>
+      <% if @file == 'nil_nil' %>
+        <div class="row gx-5 align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5"><img class="img-fluid rounded-circle" src="img/01.jpg" alt="..." /></div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+              <h2 class="display-4">Результат пошуку</h2>
+                <p>Вказаний Вами номер сертифікату не існує</p>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-warning" type="button">Назад</button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      <% else %>
+        <div class="row gx-5 align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5"><img class="img-fluid rounded-circle" src="img/01.jpg" alt="..." /></div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+              <h2 class="display-4">Результат пошуку</h2>
+              <% @file.each do |file| %>
+              <p>Було знайдено <%=  file.number %> сертифікат</p>
+              <p><%=  file.file %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+        <div class="row gx-5 align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5"><img class="img-fluid rounded-circle" src="img/01.jpg" alt="..." /></div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+              <h2 class="display-4">Пошук</h2>
+              <p>Для пошуку сертифікату введіть його номер та натисніть кнопку пошуку</p>
+            </div>
+          </div>
+        </div>
     <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search">
+      <input class="form-control me-2" name="s" type="search" placeholder="Пошук" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Знайти</button>
     </form>
+    <% end %>
   </div>
 </section>

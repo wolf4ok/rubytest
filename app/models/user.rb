@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  has_and_belongs_to_many :skills
+  has_many :certificates
   #validate :mail, format: { with: URI::MailTo::EMAIL_REGEXP }
   #validates :lastname, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
   #validates :firstname, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/

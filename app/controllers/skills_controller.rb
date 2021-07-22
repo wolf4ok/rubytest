@@ -1,9 +1,16 @@
 class SkillsController < ApplicationController
-  layout false
   skip_before_action :verify_authenticity_token
+  before_action :skill_item, only: %i[show edit update destroy]
+  #before_action :is_admin, only: %i[edit update new create destroy]
+  #before_action :is_admin
+  #layout 'admin'
 
   def index
-    @skills = Skill.all
+    if params[:s]
+      @skills = Skill.where('name = ?', params[:s])
+    else
+      @skills = Skill.all
+    end
   end
 
   def create
@@ -11,44 +18,43 @@ class SkillsController < ApplicationController
     if skill.persisted?
       redirect_to skills_path
     else
-      render body: skill.errors, status: :unprocessable_entity
+      render json: skill.errors, status: :unprocessable_entity
     end
 
   end
 
   def new; end
 
-  def show
-    unless (@skill = Skill.where(id: params[:id]).first)
-      render body: 'Skill not found or delete', status: 404
-    end
-  end
+  def show; end
 
-  def edit
-    unless (@skill = Skill.where(id: params[:id]).first)
-      render body: 'Skill not found or delete', status: 404
-    end
-  end
+  def edit; end
 
   def update
-    skill = Skill.where(id: params[:id]).first
-    if skill.update(skills_params)
+    if @skill.update(skills_params)
       redirect_to skills_path
     else
-      render body: skill.errors, status: :unprocessable_entity
+      render json: skill.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    skill = Skill.where(id: params[:id]).first.destroy
-    if skill.destroyed?
+    if @skill.destroy.destroyed?
       redirect_to skills_path
     else
       render body: skill.errors, status: :unprocessable_entity
     end
   end
 
+
+  private
+
   def  skills_params
     params.permit(:name, :description)
   end
+
+  def skill_item
+    @skill = Skill.where(id: params[:id]).first
+    render_404 unless @skill
+  end
+
 end

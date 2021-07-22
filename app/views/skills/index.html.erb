@@ -18,25 +18,32 @@
     <div style ="width: 50%; margin: 0 auto;">
       <div>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search">
+          <input class="form-control me-2" name="s" type="search" placeholder="Пошук за назвою" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Знайти</button>
         </form>
       </div>
-      <div>
-        <%= button_to 'New Skill', new_skill_path, method: :get %>
+      <div class="d-flex">
+        <%= button_to 'Усі навики', skills_path, method: :get %>
+        <%= button_to 'Новий навик', new_skill_path, method: :get %>
       </div>
     </div>
   </div>
   <div>
-    <table>
-      <tr><th>Назва навику</th><th>Описання навику</th></tr>
+    <% unless @skills.empty? %>
+      <table>
+        <tr><th>Назва навику</th><th>Описання навику</th></tr>
         <% @skills.each do |skill| %>
-        <tr><td><%= link_to skill.name, edit_skill_path(skill) %></td><td><%=  skill.description %></td></tr>
-        <tr><td colspan="2" align="right">
-          <%= button_to 'Delete', skill_path(skill), method: :delete %>
-        </td></tr>
-       <% end %>
-    </table>
+          <tr><td><%= link_to skill.name, skill_path(skill) %></td><td><%=  skill.description %></td></tr>
+          <tr><td align="left">
+            <%= button_to 'Змінити', edit_skill_path(skill), method: :get %>
+          </td><td align="right">
+            <%= button_to 'Видалити', skill_path(skill), method: :delete %>
+          </td></tr>
+        <% end %>
+      </table>
+    <% else %>
+      <h2> No Skills </h2>
+    <% end %>
   </div>
   </div>
 </section>

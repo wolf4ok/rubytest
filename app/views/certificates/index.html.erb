@@ -18,7 +18,7 @@
     <div style ="width: 50%; margin: 0 auto;">
       <div>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search">
+          <input class="form-control me-2" name="s" type="search" placeholder="Пошук" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Знайти</button>
         </form>
       </div>
@@ -28,15 +28,21 @@
     </div>
   </div>
   <div>
-    <table>
-      <tr><th>Користувач</th><th>Тип сертифікату</th><th>Номер сертифікату</th><th>Дата отримання</th></tr>
-      <% @certificates.each do |certificate| %>
-        <tr><td><%= link_to certificate.user, edit_certificate_path(certificate) %></td><td><%=  certificate.certs %></td><td><%=  certificate.number %></td><td><%=  certificate.data %></td></tr>
-        <tr><td colspan="4" align="right">
-          <%= button_to 'Delete', certificate_path(certificate), method: :delete %>
-        </td></tr>
-      <% end %>
-    </table>
+    <% unless @certificates.empty? %>
+      <table>
+        <tr><th>Користувач</th><th>Тип сертифікату</th><th>Номер сертифікату</th><th>Дата отримання</th></tr>
+        <% @certificates.each do |certificate| %>
+          <tr><td><%= link_to certificate.user_id, certificate_path(certificate) %></td><td><%=  certificate.cert_id %></td><td><%=  certificate.number %></td><td><%=  certificate.data %></td></tr>
+          <tr><td align="left">
+            <%= button_to 'Update', edit_certificate_path(certificate), method: :get %>
+          </td><td colspan="3" align="right">
+            <%= button_to 'Delete', certificate_path(certificate), method: :delete %>
+          </td></tr>
+        <% end %>
+      </table>
+    <% else %>
+      <h2> No Certificates </h2>
+    <% end %>
   </div>
   </div>
 </section>

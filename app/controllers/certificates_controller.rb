@@ -1,9 +1,16 @@
 class CertificatesController < ApplicationController
-  layout false
   skip_before_action :verify_authenticity_token
+  before_action :certtificate_item, only: %i[show edit update destroy]
+  #before_action :is_admin, only: %i[edit update new create destroy]
+  #before_action :is_admin
+  #layout 'admin'
 
   def index
-    @certificates = Certificate.all
+    if params[:s]
+      @certificates = Certificate.where('number = ?', params[:s])
+    else
+      @certificates = Certificate.all
+    end
   end
 
   def create
@@ -11,43 +18,42 @@ class CertificatesController < ApplicationController
     if certificate.persisted?
       redirect_to certificates_path
     else
-      render body: certificate.errors, status: :unprocessable_entity
+      render json: certificate.errors, status: :unprocessable_entity
     end
   end
 
   def new; end
 
-  def show
-    unless (@certificate = Certificate.where(id: params[:id]).first)
-      render body: 'Certificate not found or delete', status: 404
-    end
-  end
+  def show; end
 
-  def edit
-    unless (@certificate = Certificate.where(id: params[:id]).first)
-      render body: 'Certificate not found or delete', status: 404
-    end
-  end
+  def edit; end
 
   def update
-    certificate = Certificate.where(id: params[:id]).first
-    if certificate.update(certificates_params)
+    if @certificate.update(certificates_params)
       redirect_to certificates_path
     else
-      render body: certificate.errors, status: :unprocessable_entity
+      render json: certificate.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    certificate = Certificate.where(id: params[:id]).first.destroy
-    if certificate.destroyed?
+    if @certificate.destroy.destroyed?
       redirect_to certificates_path
     else
-      render body: certificate.errors, status: :unprocessable_entity
+      render json: certificate.errors, status: :unprocessable_entity
     end
   end
 
+
+  private
+
   def  certificates_params
-    params.permit(:user, :certs, :number, :data, :file)
+    params.permit(:user_id, :cert_id, :number, :data, :file)
   end
+
+  def certtificate_item
+    @certificate = Certificate.where(id: params[:id]).first
+    render_404 unless @certificate
+  end
+
 end

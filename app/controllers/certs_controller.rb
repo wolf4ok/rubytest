@@ -1,9 +1,16 @@
 class CertsController < ApplicationController
-  layout false
   skip_before_action :verify_authenticity_token
+  before_action :cert_item, only: %i[show edit update destroy]
+  #before_action :is_admin, only: %i[edit update new create destroy]
+  #before_action :is_admin
+  #layout 'admin'
 
   def index
-    @certs = Cert.all
+    if params[:s]
+      @certs = Cert.where('name = ?', params[:s])
+    else
+      @certs = Cert.all
+    end
   end
 
   def create
@@ -11,43 +18,42 @@ class CertsController < ApplicationController
     if cert.persisted?
       redirect_to certs_path
     else
-      render body: cert.errors, status: :unprocessable_entity
+      render json: cert.errors, status: :unprocessable_entity
     end
   end
 
   def new; end
 
-  def show
-    unless (@cert = Cert.where(id: params[:id]).first)
-      render body: 'Cert not found or delete', status: 404
-    end
-  end
+  def show; end
 
-  def edit
-    unless (@cert = Cert.where(id: params[:id]).first)
-      render body: 'Cert not found or delete', status: 404
-    end
-  end
+  def edit; end
 
   def update
-    cert = Cert.where(id: params[:id]).first
-    if cert.update(certs_params)
+    if @cert.update(certs_params)
       redirect_to certs_path
     else
-      render body: cert.errors, status: :unprocessable_entity
+      render json: cert.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    cert = Cert.where(id: params[:id]).first.destroy
-    if cert.destroyed?
+    if @cert.destroy.destroyed?
       redirect_to certs_path
     else
-      render body: cert.errors, status: :unprocessable_entity
+      render json: cert.errors, status: :unprocessable_entity
     end
   end
+
+
+  private
 
   def  certs_params
     params.permit(:name, :description)
   end
+
+  def cert_item
+    @cert = Cert.where(id: params[:id]).first
+    render_404 unless @cert
+  end
+
 end

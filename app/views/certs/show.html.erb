@@ -4,3 +4,5 @@
   <li>Name: <%= @cert.name %></li>
   <li>Description: <%=  @cert.description %></li>
 </ul>
+
+<%= button_to 'Повернутись', certs_path, method: :get %>

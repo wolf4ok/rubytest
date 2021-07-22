@@ -18,25 +18,32 @@
     <div style ="width: 50%; margin: 0 auto;">
       <div>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search">
+          <input class="form-control me-2" name="s" type="search" placeholder="Пошук за назвою" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Знайти</button>
         </form>
       </div>
-      <div>
-        <%= button_to 'New Cert', new_cert_path, method: :get %>
+      <div class="d-flex">
+        <%= button_to 'Усі типи сертифікатів', certs_path, method: :get %>
+        <%= button_to 'Новий тип сертифікату', new_cert_path, method: :get %>
       </div>
     </div>
   </div>
   <div>
-    <table>
-      <tr><th>Тип сертифікату</th><th>Описання</th></tr>
-      <% @certs.each do |cert| %>
-        <tr><td><%= link_to cert.name, edit_cert_path(cert) %></td><td><%=  cert.description %></td></tr>
-        <tr><td colspan="2" align="right">
-          <%= button_to 'Delete', cert_path(cert), method: :delete %>
-        </td></tr>
-      <% end %>
-    </table>
+    <% unless @certs.empty? %>
+      <table>
+        <tr><th>Тип сертифікату</th><th>Описання</th></tr>
+        <% @certs.each do |cert| %>
+          <tr><td><%= link_to cert.name, cert_path(cert) %></td><td><%=  cert.description %></td></tr>
+          <tr><td align="left">
+            <%= button_to 'Змінити', edit_cert_path(cert), method: :get %>
+          </td><td align="right">
+            <%= button_to 'Видалити', cert_path(cert), method: :delete %>
+          </td></tr>
+        <% end %>
+      </table>
+    <% else %>
+      <h2> No Certs </h2>
+    <% end %>
   </div>
   </div>
 </section>

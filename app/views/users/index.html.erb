@@ -15,28 +15,35 @@
         </div>
       </div>
     </div>
-    <div style ="width: 50%; margin: 0 auto;">
+    <div style ="width: 50%; margin: 1 auto;">
       <div>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search">
+          <input class="form-control me-2" name="s" type="search" placeholder="Пошук за Іменем" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Знайти</button>
         </form>
       </div>
-      <div>
-        <%= button_to 'New User', new_user_path, method: :get %>
+      <div class="d-flex">
+        <%= button_to 'Усі користувачі', users_path, method: :get %>
+        <%= button_to 'Новий користувач', new_user_path, method: :get %>
       </div>
     </div>
   </div>
   <div>
-    <table>
-      <tr><th>Фамілія</th><th>Ім'я</th><th>По батькові</th><th>Пошта</th><th>Адреса</th><th>Акаунт</th></tr>
-      <% @users.each do |user| %>
-        <tr><td><%= link_to user.lastname, edit_user_path(user) %></td><td><%=  user.firstname %></td><td><%=  user.surname %></td><td><%=  user.mail %></td><td><%=  user.home %></td><td><%=  user.accaunt %></td></tr>
-        <tr><td colspan="6" align="right">
-          <%= button_to 'Delete', user_path(user), method: :delete %>
-        </td></tr>
-      <% end %>
-    </table>
+    <% unless @users.empty? %>
+      <table>
+        <tr><th>Фамілія</th><th>Ім'я</th><th>По батькові</th><th>Пошта</th><th>Адреса</th><th>Акаунт</th></tr>
+        <% @users.each do |user| %>
+          <tr><td><%= link_to user.lastname, user_path(user) %></td><td><%=  user.firstname %></td><td><%=  user.surname %></td><td><%=  user.mail %></td><td><%=  user.home %></td><td><%=  user.accaunt %></td></tr>
+          <tr><td align="left">
+            <%= button_to 'Змінити', edit_user_path(user), method: :get %>
+          </td><td colspan="5" align="right">
+            <%= button_to 'Видалити', user_path(user), method: :delete %>
+          </td></tr>
+        <% end %>
+      </table>
+    <% else %>
+      <h2> No Users </h2>
+    <% end %>
   </div>
   </div>
 </section>

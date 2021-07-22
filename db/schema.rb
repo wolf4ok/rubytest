@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_234619) do
+ActiveRecord::Schema.define(version: 2021_07_21_221227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "certificates", force: :cascade do |t|
-    t.integer "user"
-    t.integer "certs"
+    t.integer "user_id"
+    t.integer "cert_id"
     t.string "number"
     t.date "data"
     t.string "file"
@@ -58,6 +58,11 @@ ActiveRecord::Schema.define(version: 2021_07_20_234619) do
     t.index ["firstname"], name: "index_users_on_firstname"
     t.index ["lastname"], name: "index_users_on_lastname"
     t.index ["mail"], name: "index_users_on_mail"
+  end
+
+  create_table "users_skills", id: false, force: :cascade do |t|
+    t.integer "users_id"
+    t.integer "skills_id"
   end
 
 end

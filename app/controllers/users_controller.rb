@@ -1,9 +1,16 @@
 class UsersController < ApplicationController
-  layout false
   skip_before_action :verify_authenticity_token
+  before_action :user_item, only: %i[show edit update destroy]
+  #before_action :is_admin, only: %i[edit update new create destroy]
+  #before_action :is_admin
+  #layout 'admin'
 
   def index
-    @users = User.all
+    if params[:s]
+      @users = User.where('lastname = ?', params[:s])
+    else
+      @users = User.all
+    end
   end
 
   def create
@@ -11,44 +18,42 @@ class UsersController < ApplicationController
     if user.persisted?
       redirect_to users_path
     else
-      render body: user.errors, status: :unprocessable_entity
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
   def new; end
 
-  def show
-    unless (@user = User.where(id: params[:id]).first)
-      render body: 'User not found or delete', status: 404
-    end
-  end
+  def show; end
 
-  def edit
-    unless (@user = User.where(id: params[:id]).first)
-      render body: 'User not found or delete', status: 404
-    end
-  end
+  def edit; end
 
   def update
-    user = User.where(id: params[:id]).first
-    if user.update(users_params)
+    if @user.update(users_params)
       redirect_to users_path
     else
-      render body: user.errors, status: :unprocessable_entity
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    user = User.where(id: params[:id]).first.destroy
-    if user.destroyed?
+    if @user.destroy.destroyed?
       redirect_to users_path
     else
-      render body: user.errors, status: :unprocessable_entity
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
+
+  private
+
   def  users_params
-    params.permit(:lastname, :firstname, :surname, :mail, :home, :resume_active)
+    params.permit(:lastname, :firstname, :surname, :mail, :home, :resume_active, :comment, :skills, :accaunt)
+  end
+
+  def user_item
+    @user = User.where(id: params[:id]).first
+    render_404 unless @user
   end
 
 end
