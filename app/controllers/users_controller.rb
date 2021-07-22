@@ -18,7 +18,8 @@ class UsersController < ApplicationController
     if user.persisted?
       redirect_to users_path
     else
-      render json: user.errors, status: :unprocessable_entity
+      flash.now[:error] = "Заповніть усі поля коректно"
+      render :new
     end
   end
 
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
     if @user.update(users_params)
       redirect_to users_path
     else
+      flash.now[:error] = "Заповніть усі поля коректно"
       render json: user.errors, status: :unprocessable_entity
     end
   end
@@ -40,6 +42,7 @@ class UsersController < ApplicationController
     if @user.destroy.destroyed?
       redirect_to users_path
     else
+      flash.now[:error] = "Неможливо видалити дані"
       render json: user.errors, status: :unprocessable_entity
     end
   end

@@ -18,7 +18,8 @@ class CertificatesController < ApplicationController
     if certificate.persisted?
       redirect_to certificates_path
     else
-      render json: certificate.errors, status: :unprocessable_entity
+      flash.now[:error] = "Заповніть усі поля коректно"
+      render :new
     end
   end
 
@@ -32,6 +33,7 @@ class CertificatesController < ApplicationController
     if @certificate.update(certificates_params)
       redirect_to certificates_path
     else
+      flash.now[:error] = "Заповніть усі поля коректно"
       render json: certificate.errors, status: :unprocessable_entity
     end
   end
@@ -40,6 +42,7 @@ class CertificatesController < ApplicationController
     if @certificate.destroy.destroyed?
       redirect_to certificates_path
     else
+      flash.now[:error] = "Неможливо видалити дані"
       render json: certificate.errors, status: :unprocessable_entity
     end
   end

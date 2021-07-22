@@ -18,7 +18,8 @@ class SkillsController < ApplicationController
     if skill.persisted?
       redirect_to skills_path
     else
-      render json: skill.errors, status: :unprocessable_entity
+      flash.now[:error] = "Заповніть усі поля коректно"
+      render :new
     end
 
   end
@@ -33,6 +34,7 @@ class SkillsController < ApplicationController
     if @skill.update(skills_params)
       redirect_to skills_path
     else
+      flash.now[:error] = "Заповніть усі поля коректно"
       render json: skill.errors, status: :unprocessable_entity
     end
   end
@@ -41,6 +43,7 @@ class SkillsController < ApplicationController
     if @skill.destroy.destroyed?
       redirect_to skills_path
     else
+      flash.now[:error] = "Неможливо видалити дані"
       render body: skill.errors, status: :unprocessable_entity
     end
   end
