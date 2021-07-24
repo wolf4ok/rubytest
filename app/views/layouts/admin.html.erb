@@ -35,16 +35,29 @@
           </li>
         </ul>
       </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-primary">Реєстрація</button>
-        <button type="button" class="btn btn-primary">Увійти</button>
-      </div>
+      <% if accaunt_signed_in? %>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a style="color: #CCCCCC"> Вітаємо, <%= current_accaunt.email %></a>
+          <%= link_to 'Акаунт', edit_accaunt_registration_path, method: :delete, class: "btn btn-primary" %>
+          <%= link_to 'Вихід', destroy_accaunt_session_path, method: :delete, class: "btn btn-primary" %>
+        </div>
+      <% else %>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <%= link_to 'Увійти', new_accaunt_session_path, class: "btn btn-primary" %>
+          <%= link_to 'Реєстрація', new_accaunt_registration_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
   </nav>
 </div>
+<div class="jumbotron vertical-center">
+  <div class="container">
+    <% render 'include/main/notification' %>
 
-<%= yield %>
+    <%= yield %>
 
+  </div>
+</div>
 </body>
 
 </html>

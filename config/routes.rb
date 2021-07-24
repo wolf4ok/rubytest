@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :accaunts
   #get 'post/index'
   #get 'post/:id', to: 'posts#show'
   root to: "post#index"
