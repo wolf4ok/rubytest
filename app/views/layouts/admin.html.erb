@@ -38,7 +38,7 @@
       <% if accaunt_signed_in? %>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <a style="color: #CCCCCC"> Вітаємо, <%= current_accaunt.email %></a>
-          <%= link_to 'Акаунт', edit_accaunt_registration_path, method: :delete, class: "btn btn-primary" %>
+          <%= link_to 'Акаунт', edit_accaunt_registration_path, class: "btn btn-primary" %>
           <%= link_to 'Вихід', destroy_accaunt_session_path, method: :delete, class: "btn btn-primary" %>
         </div>
       <% else %>

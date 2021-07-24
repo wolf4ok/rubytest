@@ -30,15 +30,17 @@
             <li class="nav-item">
               <a class="nav-link" href="/recruter">Рекрутерам</a>
             </li>
+            <% if accaunt_signed_in? %>
             <li class="nav-item">
               <a class="nav-link" href="/users">Адмінка</a>
             </li>
+            <% end %>
           </ul>
         </div>
         <% if accaunt_signed_in? %>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <a style="color: #CCCCCC"> Вітаємо, <%= current_accaunt.email %></a>
-          <%= link_to 'Акаунт', edit_accaunt_registration_path, method: :delete, class: "btn btn-primary" %>
+          <%= link_to 'Акаунт', edit_accaunt_registration_path, class: "btn btn-primary" %>
           <%= link_to 'Вихід', destroy_accaunt_session_path, method: :delete, class: "btn btn-primary" %>
         </div>
         <% else %>

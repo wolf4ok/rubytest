@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin
-    render_403 unless current_user.admin
-    #render json: 'Access denied!', status: :forbidden unless current_user.admin
+    render_403 unless current_accaunt.admin
   end
 
 end
