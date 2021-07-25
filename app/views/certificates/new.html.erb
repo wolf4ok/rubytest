@@ -1,8 +1,8 @@
 <h2> new Certificates </h2> </br>
 
 <%= simple_form_for @certificate do |f| %>
-  <%= f.input :user_id, label: 'User:', input_html: {class: "form-text"} %>
-  <%= f.input :cert_id, label: 'Cert type:', input_html: {class: "form-text"} %>
+  <%= f.association :user, label: 'User:', input_html: {class: "form-text"} %>
+  <%= f.association :cert, label: 'Cert type:', input_html: {class: "form-text"} %>
   <%= f.input :number, label: 'Cert number:', input_html: {class: "form-text"} %>
   <%= f.input :data, label: 'Data:', input_html: {class: "form-text"} %>
   <%= f.input :file, label: 'File:', input_html: {class: "form-text"} %>

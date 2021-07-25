@@ -35,7 +35,7 @@
       <table>
         <tr><th>Користувач</th><th>Тип сертифікату</th><th>Номер сертифікату</th><th>Дата отримання</th></tr>
         <% @certificates.each do |certificate| %>
-          <tr><td><%= link_to certificate.user_id, certificate_path(certificate) %></td><td><%=  certificate.cert_id %></td><td><%=  certificate.number %></td><td><%=  certificate.data %></td></tr>
+          <tr><td><%= link_to certificate.user.lastname, certificate_path(certificate) %></td><td><%=  certificate.cert.name %></td><td><%=  certificate.number %></td><td><%=  certificate.data %></td></tr>
           <tr><td align="left">
             <%= button_to 'Змінити', edit_certificate_path(certificate), method: :get %>
           </td><td colspan="3" align="right">
@@ -44,7 +44,7 @@
         <% end %>
       </table>
     <% else %>
-      <h2> No Certificates </h2>
+      <h2> No Certificates </h2> associations
     <% end %>
   </div>
   </div>

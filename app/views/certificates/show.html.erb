@@ -1,8 +1,8 @@
 <h2> show Certificate </h2>
 
 <ul>
-  <li>User: <%= @certificate.user_id %></li>
-  <li>Cert type: <%=  @certificate.cert_id %></li>
+  <li>User: <%= @certificate.user.lastname %></li>
+  <li>Cert type: <%=  @certificate.cert.name %></li>
   <li>Number: <%=  @certificate.number %></li>
   <li>Data: <%=  @certificate.data %></li>
   <li>File: <%=  @certificate.file %></li>
